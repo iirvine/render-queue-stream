@@ -1,0 +1,16 @@
+{
+  "name": "renderqueue-stream",
+  "version": "0.0.1",
+  "description": "a writable stream for progressive, queued rendering using requestAnimationFrame",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "requestAnimationFrame",
+    "renderqueue",
+    "stream"
+  ],
+  "author": "iirvine",
+  "license": "MIT"
+}
