@@ -11,7 +11,7 @@ module.exports = function(fn) {
 	stream.once('queued', render);
 
 	stream._write = function(chunk, endcoding, cb) {
-		queue = queue.concat([chunk])
+		queue = queue.concat(chunk)
 		stream.emit('queued')
 		cb()
 	}
@@ -42,7 +42,8 @@ module.exports = function(fn) {
 		// enough that we can add whatever's left in one go
 		if (queue.length <= threshold) {
 			if (requestID) cancelFrame(requestID)
-			return fn(queue)
+			fn(queue)
+			return stream.emit('done')
 		}
 		fn(queue.splice(0, rate))
 		requestID = requestFrame(clearQueue)
