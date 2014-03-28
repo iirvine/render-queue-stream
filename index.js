@@ -3,6 +3,7 @@ var Writable = require('stream').Writable;
 module.exports = function(fn) {
 	var rate = 500,
 		queue = [],
+		threshold = rate * 100,
 		requestID = null,
 		stream = Writable({ objectMode: true });
 
@@ -21,6 +22,12 @@ module.exports = function(fn) {
 		return stream;
 	}
 
+	stream.threshold = function(_) {
+		if (!arguments.length) return threshold;
+		threshold = _;
+		return stream;
+	}
+	
 	stream.remaining = function() {
 		return queue.length;
 	}
@@ -33,7 +40,7 @@ module.exports = function(fn) {
 	function clearQueue() {
 		// all of our data is queued now, so let's whittle away at it until it's small
 		// enough that we can add whatever's left in one go
-		if (queue.length < (rate * 100)) {
+		if (queue.length <= threshold) {
 			if (requestID) cancelFrame(requestID)
 			return fn(queue)
 		}
