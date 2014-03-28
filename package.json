@@ -1,5 +1,9 @@
 {
-  "name": "renderqueue-stream",
+  "name": "render-queue-stream",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:iirvine/render-queue-stream.git"
+  },
   "version": "0.0.1",
   "description": "a writable stream for progressive, queued rendering using requestAnimationFrame",
   "main": "index.js",
